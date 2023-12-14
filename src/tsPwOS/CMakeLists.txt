@@ -1,0 +1,1 @@
+add_executable(tsPwOS tsPwOS.cpp)
