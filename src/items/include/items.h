@@ -12,9 +12,9 @@ namespace tspwos::items {
 
     class Item {
     public:
-        virtual void addComponent(ItemPtr newItem);
         //virtual void operation() = 0;
-        //virtual void removeComponent(std::shared_ptr<Component> existingComponent);
+        virtual void addComponent(const ItemPtr& newItem);
+        virtual void removeComponent(const ItemPtr& existingComponent);
         //virtual std::shared_ptr<Component> getChild(size_t index);
         //std::string name{};
     };

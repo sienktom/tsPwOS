@@ -2,7 +2,11 @@
 
 namespace tspwos::items {
 
-    void Item::addComponent(const ItemPtr /*newItem*/) {
+    void Item::addComponent(const ItemPtr& /*newItem*/) {
+        throw ItemsInvalidOperationException{};
+    }
+
+    void Item::removeComponent(const ItemPtr& /*existingComponent*/) {
         throw ItemsInvalidOperationException{};
     }
 
