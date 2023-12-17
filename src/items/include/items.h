@@ -2,6 +2,7 @@
 
 #include <exception>
 #include <memory>
+#include <vector>
 
 namespace tspwos::items {
 
@@ -17,16 +18,18 @@ namespace tspwos::items {
         virtual void removeComponent(const ItemPtr& existingComponent);
         //virtual std::shared_ptr<Component> getChild(size_t index);
         //std::string name{};
+        virtual bool contains(const ItemPtr& item);
     };
 
-    //class ItemComposite : public Item {
-    //public:
+    class ItemComposite : public Item {
+    public:
         //void operation() override;
-        //void addComponent(ItemPtr newItem) override;
+        void addComponent(const ItemPtr& newItem) override;
         //void removeComponent(std::shared_ptr<Component> existingComponent) override;
         //std::shared_ptr<Component> getChild(size_t index) override;
-    //private:
-        //std::vector<std::shared_ptr<Component>> children{};
-    //};
+        virtual bool contains(const ItemPtr& item) override;
+    private:
+        std::vector<ItemPtr> children{};
+    };
 
 }
