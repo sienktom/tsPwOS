@@ -24,7 +24,7 @@ TEST_CASE("items may be placed in item composite", "[items]") {
     REQUIRE(true == container->contains(item));
 }
 
-TEST_CASE("items may be removed from containers", "[items]") {
+TEST_CASE("items may be removed from item composite", "[items]") {
     auto item = std::make_shared<Item>();
     auto container = std::make_shared<ItemComposite>();
     container->addComponent(item);
@@ -32,27 +32,27 @@ TEST_CASE("items may be removed from containers", "[items]") {
     REQUIRE(false == container->contains(item));
 }
 
-TEST_CASE("containers may not be placed in items", "[items]") {
+TEST_CASE("item composite may not be placed in items", "[items]") {
     auto item = std::make_shared<Item>();
     auto container = std::make_shared<ItemComposite>();
     REQUIRE_THROWS_AS(item->addComponent(container), ItemsInvalidOperationException);
     REQUIRE_THROWS_AS(item->contains(container), ItemsInvalidOperationException);
 }
 
-TEST_CASE("containers may not be removed from items", "[items]") {
+TEST_CASE("item composite may not be removed from items", "[items]") {
     auto item = std::make_shared<Item>();
     auto container = std::make_shared<ItemComposite>();
     REQUIRE_THROWS_AS(item->removeComponent(container), ItemsInvalidOperationException);
 }
 
-TEST_CASE("containers may be placed in containers", "[items]") {
+TEST_CASE("item composite may be placed in item composite", "[items]") {
     auto container1 = std::make_shared<ItemComposite>();
     auto container2 = std::make_shared<ItemComposite>();
     REQUIRE_NOTHROW(container1->addComponent(container2));
     REQUIRE(true == container1->contains(container2));
 }
 
-TEST_CASE("containers may be removed from containers", "[items]") {
+TEST_CASE("item composite may be removed from item composite", "[items]") {
     auto container1 = std::make_shared<ItemComposite>();
     auto container2 = std::make_shared<ItemComposite>();
     container1->addComponent(container2);
