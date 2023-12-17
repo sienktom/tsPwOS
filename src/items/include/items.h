@@ -25,9 +25,9 @@ namespace tspwos::items {
     public:
         //void operation() override;
         void addComponent(const ItemPtr& newItem) override;
-        //void removeComponent(std::shared_ptr<Component> existingComponent) override;
+        void removeComponent(const ItemPtr& existingComponent) override;
         //std::shared_ptr<Component> getChild(size_t index) override;
-        virtual bool contains(const ItemPtr& item) override;
+        bool contains(const ItemPtr& item) override;
     private:
         std::vector<ItemPtr> children{};
     };

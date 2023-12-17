@@ -23,6 +23,16 @@ namespace tspwos::items {
         }
     }
 
+    void ItemComposite::removeComponent(const ItemPtr& existingComponent) {
+        for (auto it = children.begin(); it != children.end();) {
+            if(*it == existingComponent) {
+                it = children.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
     bool ItemComposite::contains(const ItemPtr& item) {
         return std::find(children.begin(), children.end(), item) != children.end();
     }

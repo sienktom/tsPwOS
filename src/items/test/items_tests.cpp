@@ -24,7 +24,14 @@ TEST_CASE("items may be placed in item composite", "[items]") {
     REQUIRE(true == container->contains(item));
 }
 
-// jeśli sensowny to dodać: TEST_CASE("items may be removed from containers", "[items]")
+TEST_CASE("items may be removed from containers", "[items]") {
+    auto item = std::make_shared<Item>();
+    auto container = std::make_shared<ItemComposite>();
+    container->addComponent(item);
+    REQUIRE_NOTHROW(container->removeComponent(item));
+    REQUIRE(false == container->contains(item));
+}
+
 // jeśli sensowny to dodać: TEST_CASE("containers may not be placed in items", "[items]")
 // jeśli sensowny to dodać: TEST_CASE("containers may not be removed from items", "[items]")
 // jeśli sensowny to dodać: TEST_CASE("containers may be placed in containers", "[items]")
