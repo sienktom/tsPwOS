@@ -40,5 +40,11 @@ TEST_CASE("containers may not be placed in items", "[items]") {
 }
 
 // jeśli sensowny to dodać: TEST_CASE("containers may not be removed from items", "[items]")
+TEST_CASE("containers may not be removed from items", "[items]") {
+    auto item = std::make_shared<Item>();
+    auto container = std::make_shared<ItemComposite>();
+    REQUIRE_THROWS_AS(item->removeComponent(container), ItemsInvalidOperationException);
+}
+
 // jeśli sensowny to dodać: TEST_CASE("containers may be placed in containers", "[items]")
 // jeśli sensowny to dodać: TEST_CASE("containers may be removed from containers", "[items]")
