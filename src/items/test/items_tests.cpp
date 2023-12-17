@@ -52,4 +52,10 @@ TEST_CASE("containers may be placed in containers", "[items]") {
     REQUIRE(true == container1->contains(container2));
 }
 
-// jeśli sensowny to dodać: TEST_CASE("containers may be removed from containers", "[items]")
+TEST_CASE("containers may be removed from containers", "[items]") {
+    auto container1 = std::make_shared<ItemComposite>();
+    auto container2 = std::make_shared<ItemComposite>();
+    container1->addComponent(container2);
+    REQUIRE_NOTHROW(container1->removeComponent(container2));
+    REQUIRE(false == container1->contains(container2));
+}
