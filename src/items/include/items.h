@@ -13,7 +13,9 @@ namespace tspwos::items {
 
     class Item {
     public:
-        //virtual void operation() = 0;
+        virtual double getWeight() = 0;
+        virtual double getVolume() = 0;
+        virtual double getCapacity() = 0;
         virtual void addComponent(const ItemPtr& newItem);
         virtual void removeComponent(const ItemPtr& existingComponent);
         //virtual std::shared_ptr<Component> getChild(size_t index);
@@ -23,13 +25,25 @@ namespace tspwos::items {
 
     class ItemComposite : public Item {
     public:
-        //void operation() override;
+        double getWeight() override;
+        double getVolume() override;
+        double getCapacity() override;
         void addComponent(const ItemPtr& newItem) override;
         void removeComponent(const ItemPtr& existingComponent) override;
         //std::shared_ptr<Component> getChild(size_t index) override;
         bool contains(const ItemPtr& item) override;
     private:
         std::vector<ItemPtr> children{};
+    };
+
+
+    class SmallStone : public Item {
+    public:
+        static constexpr double DEFAULT_WEIGHT = 100;
+        static constexpr double DEFAULT_VOLUME = 100;
+        double getWeight() override;
+        double getVolume() override;
+        double getCapacity() override;
     };
 
 }

@@ -37,4 +37,29 @@ namespace tspwos::items {
         return std::find(children.begin(), children.end(), item) != children.end();
     }
 
+    double ItemComposite::getWeight() {
+        return 0.0;
+    }
+
+    double ItemComposite::getVolume() {
+        return 0.0;
+    }
+
+    double ItemComposite::getCapacity() {
+        return 0.0;
+    }
+
+
+    double SmallStone::getWeight() {
+        return SmallStone::DEFAULT_WEIGHT;
+    }
+
+    double SmallStone::getVolume() {
+        return SmallStone::DEFAULT_VOLUME;
+    }
+
+    double SmallStone::getCapacity() {
+        return 0.0;
+    }
+
 }
