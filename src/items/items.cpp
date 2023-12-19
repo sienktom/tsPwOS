@@ -31,7 +31,11 @@ namespace tspwos::items {
 
     void ItemComposite::addComponent(const ItemPtr& newItem) {
         if(newItem) {
-            children.push_back(newItem);
+            if(getCapacity() < newItem->getVolume()) {
+                throw ItemsInvalidOperationException{};
+            } else {
+                children.push_back(newItem);
+            }
         }
     }
 
@@ -76,6 +80,15 @@ namespace tspwos::items {
 
     double SmallStone::getVolume() {
         return SmallStone::DEFAULT_VOLUME;
+    }
+
+
+    double HugeStone::getWeight() {
+        return HugeStone::DEFAULT_WEIGHT;
+    }
+
+    double HugeStone::getVolume() {
+        return HugeStone::DEFAULT_VOLUME;
     }
 
 

@@ -97,19 +97,36 @@ TEST_CASE("small chest has its own default weight and volume and capacity", "[it
 
 TEST_CASE("a small stone can be put into a small box", "[items]") {
     auto smallChest = std::make_shared<SmallChest>();
-    auto smallStone = std::make_shared<SmallStone>();
-
-    smallChest->addComponent(smallStone);
-
-    REQUIRE(SmallStone::DEFAULT_WEIGHT == smallStone->getWeight());
-    REQUIRE(SmallStone::DEFAULT_VOLUME == smallStone->getVolume());
-    REQUIRE(0 == smallStone->getCapacity());
-
     REQUIRE(SmallChest::DEFAULT_WEIGHT == smallChest->getWeight());
     REQUIRE(SmallChest::DEFAULT_VOLUME == smallChest->getVolume());
     REQUIRE(SmallChest::DEFAULT_CAPACITY == smallChest->getCapacity());
 
+    auto smallStone = std::make_shared<SmallStone>();
+    REQUIRE(SmallStone::DEFAULT_WEIGHT == smallStone->getWeight());
+    REQUIRE(SmallStone::DEFAULT_VOLUME == smallStone->getVolume());
+    REQUIRE(0 == smallStone->getCapacity());
+
+    smallChest->addComponent(smallStone);
+
     REQUIRE(SmallChest::DEFAULT_WEIGHT + SmallStone::DEFAULT_WEIGHT == smallChest->getTotalWeight());
     REQUIRE(SmallChest::DEFAULT_VOLUME == smallChest->getVolume());
     REQUIRE(SmallChest::DEFAULT_CAPACITY - SmallStone::DEFAULT_VOLUME == smallChest->getTotalCapacity());
+}
+
+TEST_CASE("a huge stone can not be put into a small box", "[items]") {
+    auto smallChest = std::make_shared<SmallChest>();
+    REQUIRE(SmallChest::DEFAULT_WEIGHT == smallChest->getWeight());
+    REQUIRE(SmallChest::DEFAULT_VOLUME == smallChest->getVolume());
+    REQUIRE(SmallChest::DEFAULT_CAPACITY == smallChest->getCapacity());
+
+    auto hugeStone = std::make_shared<HugeStone>();
+    REQUIRE(HugeStone::DEFAULT_WEIGHT == hugeStone->getWeight());
+    REQUIRE(HugeStone::DEFAULT_VOLUME == hugeStone->getVolume());
+    REQUIRE(0 == hugeStone->getCapacity());
+
+    REQUIRE_THROWS_AS(smallChest->addComponent(hugeStone), ItemsInvalidOperationException);
+
+    REQUIRE(SmallChest::DEFAULT_WEIGHT == smallChest->getTotalWeight());
+    REQUIRE(SmallChest::DEFAULT_VOLUME == smallChest->getVolume());
+    REQUIRE(SmallChest::DEFAULT_CAPACITY == smallChest->getTotalCapacity());
 }

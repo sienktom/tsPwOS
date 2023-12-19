@@ -45,6 +45,15 @@ namespace tspwos::items {
     };
 
 
+    class HugeStone : public Item {
+    public:
+        static constexpr double DEFAULT_WEIGHT = 100000;
+        static constexpr double DEFAULT_VOLUME = 100000;
+        double getWeight() override;
+        double getVolume() override;
+    };
+
+
     class SmallChest : public ItemComposite {
     public:
         static constexpr double DEFAULT_WEIGHT = 350;
