@@ -14,23 +14,22 @@ namespace tspwos::items {
     class Item {
     public:
         virtual double getWeight() = 0;
+        virtual double getTotalWeight();
         virtual double getVolume() = 0;
-        virtual double getCapacity() = 0;
+        virtual double getCapacity();
+        virtual double getTotalCapacity();
         virtual void addComponent(const ItemPtr& newItem);
         virtual void removeComponent(const ItemPtr& existingComponent);
-        //virtual std::shared_ptr<Component> getChild(size_t index);
-        //std::string name{};
         virtual bool contains(const ItemPtr& item);
     };
 
     class ItemComposite : public Item {
     public:
-        double getWeight() override;
-        double getVolume() override;
+        double getTotalWeight() final;
         double getCapacity() override;
+        double getTotalCapacity() final;
         void addComponent(const ItemPtr& newItem) override;
         void removeComponent(const ItemPtr& existingComponent) override;
-        //std::shared_ptr<Component> getChild(size_t index) override;
         bool contains(const ItemPtr& item) override;
     protected:
         std::vector<ItemPtr> children{};
@@ -43,7 +42,6 @@ namespace tspwos::items {
         static constexpr double DEFAULT_VOLUME = 100;
         double getWeight() override;
         double getVolume() override;
-        double getCapacity() override;
     };
 
 

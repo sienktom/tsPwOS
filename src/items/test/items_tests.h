@@ -8,7 +8,12 @@ namespace tspwos::items {
     public:
         double getWeight() override;
         double getVolume() override;
-        double getCapacity() override;
+    };
+
+    class MyItemComposite : public ItemComposite {
+    public:
+        double getWeight() override;
+        double getVolume() override;
     };
 
 }

@@ -16,6 +16,18 @@ namespace tspwos::items {
         throw ItemsInvalidOperationException{};
     }
 
+    double Item::getTotalWeight() {
+        return getWeight();
+    }
+
+    double Item::getCapacity() {
+        return 0.0;
+    }
+
+    double Item::getTotalCapacity() {
+        return getCapacity();
+    }
+
 
     void ItemComposite::addComponent(const ItemPtr& newItem) {
         if(newItem) {
@@ -37,16 +49,24 @@ namespace tspwos::items {
         return std::find(children.begin(), children.end(), item) != children.end();
     }
 
-    double ItemComposite::getWeight() {
-        return 0.0;
-    }
-
-    double ItemComposite::getVolume() {
-        return 0.0;
-    }
-
     double ItemComposite::getCapacity() {
-        return 0.0;
+        return Item::getCapacity();
+    }
+
+    double ItemComposite::getTotalWeight() {
+        auto weight = getWeight();
+        for(const auto& component : children) {
+            weight += component->getWeight();
+        }
+        return weight;
+    }
+
+    double ItemComposite::getTotalCapacity() {
+        auto capacity = getCapacity();
+        for(const auto& component : children) {
+            capacity -= component->getVolume();
+        }
+        return capacity;
     }
 
 
@@ -58,17 +78,9 @@ namespace tspwos::items {
         return SmallStone::DEFAULT_VOLUME;
     }
 
-    double SmallStone::getCapacity() {
-        return 0.0;
-    }
-
 
     double SmallChest::getWeight() {
-        auto weight = SmallChest::DEFAULT_WEIGHT;
-        for(const auto& component : children) {
-            weight += component->getWeight();
-        }
-        return weight;
+        return SmallChest::DEFAULT_WEIGHT;
     }
 
     double SmallChest::getVolume() {
@@ -76,11 +88,7 @@ namespace tspwos::items {
     }
 
     double SmallChest::getCapacity() {
-        auto capacity = SmallChest::DEFAULT_CAPACITY;
-        for(const auto& component : children) {
-            capacity -= component->getVolume();
-        }
-        return capacity;
+        return SmallChest::DEFAULT_CAPACITY;
     }
 
 }
