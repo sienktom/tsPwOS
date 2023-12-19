@@ -62,4 +62,25 @@ namespace tspwos::items {
         return 0.0;
     }
 
+
+    double SmallChest::getWeight() {
+        auto weight = SmallChest::DEFAULT_WEIGHT;
+        for(const auto& component : children) {
+            weight += component->getWeight();
+        }
+        return weight;
+    }
+
+    double SmallChest::getVolume() {
+        return SmallChest::DEFAULT_VOLUME;
+    }
+
+    double SmallChest::getCapacity() {
+        auto capacity = SmallChest::DEFAULT_CAPACITY;
+        for(const auto& component : children) {
+            capacity -= component->getVolume();
+        }
+        return capacity;
+    }
+
 }

@@ -32,7 +32,7 @@ namespace tspwos::items {
         void removeComponent(const ItemPtr& existingComponent) override;
         //std::shared_ptr<Component> getChild(size_t index) override;
         bool contains(const ItemPtr& item) override;
-    private:
+    protected:
         std::vector<ItemPtr> children{};
     };
 
@@ -41,6 +41,17 @@ namespace tspwos::items {
     public:
         static constexpr double DEFAULT_WEIGHT = 100;
         static constexpr double DEFAULT_VOLUME = 100;
+        double getWeight() override;
+        double getVolume() override;
+        double getCapacity() override;
+    };
+
+
+    class SmallChest : public ItemComposite {
+    public:
+        static constexpr double DEFAULT_WEIGHT = 350;
+        static constexpr double DEFAULT_VOLUME = 5000;
+        static constexpr double DEFAULT_CAPACITY = 4800;
         double getWeight() override;
         double getVolume() override;
         double getCapacity() override;
